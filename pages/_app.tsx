@@ -4,7 +4,7 @@ import type { AppProps } from "next/app";
 import { createTheme, NextUIProvider } from "@nextui-org/react";
 function MyApp({ Component, pageProps }: AppProps) {
   const theme = createTheme({
-    type: "dark",
+    type: "light",
     theme: {
       colors: {
         emonColor: "$pink500",
