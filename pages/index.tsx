@@ -1,26 +1,25 @@
-import type { NextPage } from "next";
-import { Avatar, Button, Text } from "@nextui-org/react";
+import { Button, Card, Container, Text } from "@nextui-org/react";
+import { signIn, signOut, useSession } from "next-auth/react";
+const Home = () => {
+  const { data: session } = useSession();
+  console.log(session);
 
-const Home: NextPage = () => {
-  return (
-    <div>
-      <Button>Click me</Button>
-      <Avatar
-        src="https://i.pravatar.cc/150?u=a04258114e29026702d"
-        css={{ size: "$20" }}
-      />
-      <Text css={{ color: "$emonColor", background: "$blue800" }}>
-        Hello world
-      </Text>
-      <Text
-        h1
-        size={60}
-        css={{ textGradient: "45deg, $purple600 -20%, $red500 50%" }}
-      >
-        I am Emon
-      </Text>
-    </div>
-  );
+  if (!session) {
+    return (
+      <div>
+        <Button onClick={() => signIn()}>Sign in with Github</Button>
+      </div>
+    );
+  } else {
+    return (
+      <Card css={{ backgroundColor: "$purple300" }}>
+        <Text css={{ backgroundColor: "$white", fontSize: "$2xl" }}>
+          Signed in with {session.user?.email}
+        </Text>
+        <Button onClick={() => signOut()}>Sign Out</Button>
+      </Card>
+    );
+  }
 };
 
 export default Home;
